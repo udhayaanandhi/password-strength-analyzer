@@ -35,7 +35,8 @@ def index():
                     cursor.execute("INSERT INTO history (hash) VALUES (?)", (pwd_hash,))
                     conn.commit()
 
-    return render_template('index.html', result=result, suggestion=suggestion)
+    entered_password = request.form.get('password') if request.method == 'POST' else None
+    return render_template('index.html', result=result, suggestion=suggestion, entered_password=entered_password)
 
 if __name__ == '__main__':
     init_db()
